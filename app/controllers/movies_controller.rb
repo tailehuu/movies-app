@@ -1,7 +1,13 @@
 class MoviesController < ApplicationController
   def index
     # TODO: should use Serializer + pagination
-    render json: { data: Movie.order('id DESC') }
+    movies = Movie.order('id DESC')
+    render json: {
+      data: ActiveModel::Serializer::CollectionSerializer.new(
+        movies,
+        each_serializer: MovieSerializer
+      )
+    }
   end
 
   def create
@@ -15,7 +21,7 @@ class MoviesController < ApplicationController
       user_id: movie_params[:user_id]
     )
 
-    render json: movie
+    render json: MovieSerializer.new(movie).as_json
   end
 
   private

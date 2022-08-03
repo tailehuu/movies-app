@@ -6,7 +6,7 @@ class SessionController < ApplicationController
     return render json: { message: 'user_not_found' }, status: :not_found if user.nil?
 
     if user.valid_password? password
-      render json: user
+      render json: SignedInUserSerializer.new(user).as_json
     else
       render json: { message: 'invalid_username_or_password' }, status: :unprocessable_entity
     end

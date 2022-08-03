@@ -10,7 +10,7 @@ class RegistrationController < ApplicationController
       )
     end
 
-    render json: user
+    render json: UserSerializer.new(user).as_json
   end
 
   private
