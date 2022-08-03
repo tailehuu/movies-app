@@ -1,7 +1,13 @@
 class MoviesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     # TODO: should use Serializer + pagination
-    movies = Movie.order('id DESC')
+    movies = if current_user
+               Movie.where(user_id: current_user.id).order('id DESC')
+             else
+               Movie.order('id DESC')
+             end
     render json: {
       data: ActiveModel::Serializer::CollectionSerializer.new(
         movies,
@@ -14,11 +20,14 @@ class MoviesController < ApplicationController
     # TODO
     # - should Scrivener validator to validate params
     # - movie_params[:user_id] should change after doing authentication
+
+    return render json: { message: 'not_authorized' }, status: :unprocessable_entity if current_user.nil?
+
     movie = Movie.create!(
       title: movie_params[:title],
       description: movie_params[:description],
       link: movie_params[:link],
-      user_id: movie_params[:user_id]
+      user_id: current_user.id
     )
 
     render json: MovieSerializer.new(movie).as_json
