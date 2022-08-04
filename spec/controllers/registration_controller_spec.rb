@@ -35,8 +35,7 @@ RSpec.describe RegistrationController do
         post :create, params
 
         expect(response).to have_http_status :unprocessable_entity
-        body = JSON.parse response.body
-        expect(body['errors']).to include(errors)
+        expect(JSON.parse(response.body)['errors']).to include(errors)
       end
     end
 
@@ -52,8 +51,7 @@ RSpec.describe RegistrationController do
         post :create, params
 
         expect(response).to have_http_status :unprocessable_entity
-        body = JSON.parse response.body
-        expect(body['errors']).to include(errors)
+        expect(JSON.parse(response.body)['errors']).to include(errors)
       end
     end
   end

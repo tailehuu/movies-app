@@ -36,7 +36,7 @@ RSpec.describe SessionController do
       end
       let(:message) { 'user_not_found' }
 
-      it 'returns error with message' do
+      it 'returns error' do
         post :sign_in, params
 
         expect(response).to have_http_status :not_found
@@ -55,7 +55,7 @@ RSpec.describe SessionController do
       end
       let(:message) { 'invalid_email_or_password' }
 
-      it 'returns error with message' do
+      it 'returns error' do
         post :sign_in, params
 
         expect(response).to have_http_status :unprocessable_entity
