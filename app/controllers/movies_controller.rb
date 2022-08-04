@@ -2,11 +2,9 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    movies = if current_user
-               Movie.where(user_id: current_user.id)
-             else
-               Movie
-             end.order('id DESC').page(params[:page] || 1)
+    movies = current_user ? Movie.where(user_id: current_user.id) : Movie
+    movies = movies.order('id DESC').page(params[:page] || 1)
+
     render json: {
       data: ActiveModel::Serializer::CollectionSerializer.new(
         movies,
@@ -18,11 +16,10 @@ class MoviesController < ApplicationController
   end
 
   def create
+    return render json: { message: 'not_authorized' }, status: :unprocessable_entity if current_user.nil?
+
     validator = MovieValidator.new(movie_params)
     return render json: { errors: validator.errors }, status: :unprocessable_entity unless validator.valid?
-
-
-    return render json: { message: 'not_authorized' }, status: :unprocessable_entity if current_user.nil?
 
     movie = Movie.create!(
       title: movie_params[:title],
