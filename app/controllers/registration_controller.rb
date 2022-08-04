@@ -1,7 +1,8 @@
 class RegistrationController < ApplicationController
   def create
-    # TODO
-    # - should validate email & password here
+    validator = RegistrationValidator.new(registration_params)
+    return render json: { errors: validator.errors }, status: :unprocessable_entity unless validator.valid?
+
     user = User.find_by_email registration_params[:email]
     if user.nil?
       user = User.create(
