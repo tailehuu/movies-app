@@ -8,7 +8,7 @@ class SessionController < ApplicationController
     if user.valid_password? password
       render json: SignedInUserSerializer.new(user).as_json
     else
-      render json: { message: 'invalid_username_or_password' }, status: :unprocessable_entity
+      render json: { message: 'invalid_email_or_password' }, status: :unprocessable_entity
     end
   end
 
