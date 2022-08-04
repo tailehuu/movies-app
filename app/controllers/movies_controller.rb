@@ -18,9 +18,9 @@ class MoviesController < ApplicationController
   end
 
   def create
-    # TODO
-    # - should Scrivener validator to validate params
-    # - movie_params[:user_id] should change after doing authentication
+    validator = MovieValidator.new(movie_params)
+    return render json: { errors: validator.errors }, status: :unprocessable_entity unless validator.valid?
+
 
     return render json: { message: 'not_authorized' }, status: :unprocessable_entity if current_user.nil?
 
