@@ -10,7 +10,7 @@
 - PostMan document [here](https://documenter.getpostman.com/view/76091/VUjFu9cb)
 - PostMan collection
 
-### Sample SPA
+### [WIP] Sample SPA
 
 - Start `movies-app` with port `3000`
 - Start `movies-spa` with port `3001`
@@ -22,7 +22,7 @@
 
 ### Integration Test
 
-- Cucumber - TBD
+- [WIP] Cucumber
 
 Can install it from [here](https://rubygems.org/gems/cucumber) then adding features.
 
