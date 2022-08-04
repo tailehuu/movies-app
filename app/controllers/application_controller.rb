@@ -16,5 +16,7 @@ class ApplicationController < ActionController::Base
     email, password = request.headers['Authorization'].gsub('Basic ', '').split(':')
     user = User.find_by_email email
     @current_user = user && user.valid_password?(password) ? user : nil
+  rescue StandardError => _e
+    @current_user = nil
   end
 end
