@@ -2,17 +2,18 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # TODO: should use Serializer + pagination
     movies = if current_user
-               Movie.where(user_id: current_user.id).order('id DESC')
+               Movie.where(user_id: current_user.id)
              else
-               Movie.order('id DESC')
-             end
+               Movie
+             end.order('id DESC').page(params[:page] || 1)
     render json: {
       data: ActiveModel::Serializer::CollectionSerializer.new(
         movies,
         each_serializer: MovieSerializer
-      )
+      ),
+      current_page: movies.current_page,
+      total_pages: movies.total_pages
     }
   end
 
