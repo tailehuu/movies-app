@@ -48,11 +48,12 @@ group :development do
   # gem 'spring'
 end
 
-group :test do
-  gem 'cucumber-rails', require: false
-  gem 'database_cleaner'
-  gem 'selenium-webdriver'
-end
+# TODO need more time to set up this test
+# group :test do
+#   gem 'cucumber-rails', require: false
+#   gem 'database_cleaner'
+#   gem 'selenium-webdriver'
+# end
 
 gem 'active_model_serializers'
 gem 'devise'
