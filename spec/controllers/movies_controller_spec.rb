@@ -22,7 +22,7 @@ RSpec.describe MoviesController do
 
         expect(response).to have_http_status :ok
         body = JSON.parse response.body
-        expect(body['data'].size).to      eq 3
+        expect(body['models'].size).to    eq 3
         expect(body['current_page']).to   eq 1
         expect(body['total_pages']).to    eq 1
       end
@@ -34,7 +34,7 @@ RSpec.describe MoviesController do
 
         expect(response).to have_http_status :ok
         body = JSON.parse response.body
-        expect(body['data'].size).to    eq 6
+        expect(body['models'].size).to    eq 6
         expect(body['current_page']).to eq 1
         expect(body['total_pages']).to  eq 1
       end

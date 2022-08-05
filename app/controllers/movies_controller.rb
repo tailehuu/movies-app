@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
     movies = movies.order('id DESC').page(params[:page] || 1)
 
     render json: {
-      data: ActiveModel::Serializer::CollectionSerializer.new(
+      models: ActiveModel::Serializer::CollectionSerializer.new(
         movies,
         each_serializer: MovieSerializer
       ),
