@@ -10,11 +10,15 @@
 - PostMan document [here](https://documenter.getpostman.com/view/76091/VUjFu9cb)
 - PostMan collection
 
-### [WIP] Sample SPA
+### SPA - Single Page Application
 
-- Start `movies-app` with port `3000`
-- Start `movies-spa` with port `3001`
-- Then enjoy the app
+Let's start backend first `rails server`.
+
+Then:
+
+- `cd spa`
+- `npm install`
+- `npm run devStart` 
 
 ### Unit Test
 
@@ -22,9 +26,9 @@
 
 ### Integration Test
 
-- [WIP] Cucumber
+*Note:* Installed Cucumber but need more time to config with SPA.
 
-Can install it from [here](https://rubygems.org/gems/cucumber) then adding features.
+`bundle exec cucumber`
 
 HAPPY CODING!
 
